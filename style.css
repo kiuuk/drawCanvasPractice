@@ -1,0 +1,53 @@
+@font-face {
+  font-family: 'englandRg';
+  src: url('fff_world_cup_2018_england-webfont.woff2') format('woff2'), url('fff_world_cup_2018_england-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.wraper {
+  position:relative;
+  width:100%;
+  height:100%;
+}
+
+#canvas {
+  position: relative;
+  width: 100%;
+  height:100%;
+  z-index: 1;
+  border: 1px solid black;
+}
+#canvasText {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 200px;
+  z-index: 2;
+  border:1px solid red;
+}
+
+.wraper .svg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.wraper .svg path {
+  fill: none;
+  transform: translateX(-20px) translateY(65px) rotateX(10deg);
+}
+.wraper .svg text {
+  font-family: 'englandRg';
+  fill: #dcdada;
+  stroke: #C0212A;
+}
+.wraper .svg text.name {
+  font-size: 45px;
+}
+.wraper .svg text.number {
+  font-size: 150px;
+  letter-spacing: -10px;
+}
