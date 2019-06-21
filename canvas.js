@@ -5,33 +5,43 @@ const ctxText = canvasText.getContext('2d');
 
 const inputName = document.getElementById('inputName');
 const inputNumber = document.getElementById('inputNumber');
-// const displayName = document.getElementById('displayName');
-// const displayNumber = document.getElementById('displayNumber');
 const submitBtn = document.getElementById('submit');
 
 function drawLogo() {
   let image = new Image();
   image.src = 'img/england-football-seeklogo.com.svg';
   image.onload = function(){
-    ctx.drawImage(this, 550, 500, 0, 0);
+    ctxText.drawImage(this, 550, 500, 15, 25);
   };
 }
 
-function drawTextNumber(value){
-  ctxText.clearRect(0, 0, 500, 500);  
-  ctxText.font = '150px englandRg';
+function drawTextName(value) {
+  ctxText.font = '80px englandRg';
   ctxText.fillStyle = '#dcdada';
   ctxText.strokeStyle = '#C0212A';
   ctxText.lineWidth = 1;
   ctxText.textAlign = 'center';
-  ctxText.fillText(value, 200, 100);
-  ctxText.strokeText(value, 200, 100);
+  ctxText.fillText(value, 480, 250);
+  ctxText.strokeText(value, 480, 250);
+}
+
+function drawTextNumber(value){
+  ctxText.font = '280px englandRg';
+  ctxText.fillStyle = '#dcdada';
+  ctxText.strokeStyle = '#C0212A';
+  ctxText.lineWidth = 1;
+  ctxText.textAlign = 'center';
+  ctxText.fillText(value, 480, 490);
+  ctxText.strokeText(value, 480, 490);
 }
 
 submitBtn.addEventListener('click', function(e){
   e.preventDefault();
   let displayName = inputName.value;
   let displayNumber = inputNumber.value;
+  canvasText.style.letterSpacing = '-5px';
+  ctxText.clearRect(0, 0, 1024, 1024);  
+  drawTextName(displayName);
   drawTextNumber(displayNumber);
   drawLogo();
 })
