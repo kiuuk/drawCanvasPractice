@@ -11,33 +11,36 @@ const displayName = document.getElementById('displayName');
 const displayNumber = document.getElementById('displayNumber');
 const submitBtn = document.getElementById('submit');
 
+let patchSelector = document.querySelectorAll('.swiper-slide');
+
 const jerseys = {
   front : 'img/front.png',
   back : 'img/back.png'
 };
 
-const patches = {
-  AirMax1 : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/AirMax1.png',
-  AirMax95 : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/AirMax95.png',
-  AirMax90 : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/AirMax90.png',
-  AirMax97 : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/AirMax97.png',
-  AirMax270 : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/AirMax270.png',
-  AirMax180 : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/AirMax180.png',
-  AirMaxVaporMax : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/AirMaxVaporMax.png',
-  TWFrank : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/TWFrank.png',
-  PrayingHands : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/PrayingHands.png',
-  CrossClubs : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/CrossClubs.png',
-  GolfFutura : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/GolfFutura.png',
-  NikeShoeBox : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/NikeShoeBox.png',
-  JustDoIt : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/JustDoIt.png',
-  NikeAir : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/NikeAir.png',
-  NOPATCH : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/NOPATCH.png'
-}
+const patches = [
+  {title : 'AirMax1', url : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/AirMax1.png'},
+  {title : 'AirMax95', url : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/AirMax95.png'},
+  {title : 'AirMax90', url : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/AirMax90.png'},
+  {title : 'AirMax97', url : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/AirMax97.png'},
+  {title : 'AirMax270', url : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/AirMax270.png'},
+  {title : 'AirMax180', url : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/AirMax180.png'},
+  {title : 'AirMaxVaporMax', url : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/AirMaxVaporMax.png'},
+  {title : 'TWFrank', url : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/TWFrank.png'},
+  {title : 'PrayingHands', url : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/PrayingHands.png'},
+  {title : 'CrossClubs', url : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/CrossClubs.png'},
+  {title : 'GolfFutura', url : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/GolfFutura.png'},
+  {title : 'NikeShoeBox', url : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/NikeShoeBox.png'},
+  {title : 'JustDoIt', url : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/JustDoIt.png'},
+  {title : 'NikeAir', url : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/NikeAir.png'},
+  {title : 'NOPATCH', url : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/NOPATCH.png'}
+]
 
-function drawPatch() {
+function drawPatch(url) {
   let patch = new Image();
-  patch.src = patches.AirMaxVaporMax;
+  patch.src = url;
   patch.onload = function(){
+    ctxPatch.clearRect(0, 0, 1024, 1024);
     ctxPatch.drawImage(this, 430, 500, 200, 200);
   };
 }
@@ -52,7 +55,12 @@ submitBtn.addEventListener('click', function(e){
   let backName = inputName.value;
   let backNumber = inputNumber.value;
   drawBack(backName, backNumber);
-  // drawPatch();
+})
+
+patchSelector.forEach(function(patch, index){
+  patch.addEventListener('click', function(e){
+    drawPatch(patches[index].url);
+  })
 })
 
 window.addEventListener('DOMContentLoaded', function(){
@@ -65,5 +73,4 @@ window.addEventListener('DOMContentLoaded', function(){
       jerseyView[i] === 'front' ? ctxFront.drawImage(this, 0, 0) : ctxBack.drawImage(this, 0, 0);
     }
   }
-  drawPatch();
 })
