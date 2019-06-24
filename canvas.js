@@ -1,7 +1,9 @@
 const canvasFront = document.getElementById('canvasFront');
 const canvasBack = document.getElementById('canvasBack');
+const canvasPatch = document.getElementById('canvasPatch');
 const ctxFront = canvasFront.getContext('2d');
 const ctxBack = canvasBack.getContext('2d');
+const ctxPatch = canvasPatch.getContext('2d');
 
 const inputName = document.getElementById('inputName');
 const inputNumber = document.getElementById('inputNumber');
@@ -14,11 +16,29 @@ const jerseys = {
   back : 'img/back.png'
 };
 
-function drawLogo() {
-  let image = new Image();
-  image.src = 'img/england-football-seeklogo.com.svg';
-  image.onload = function(){
-    ctxBack.drawImage(this, 550, 500, 20, 25);
+const patches = {
+  AirMax1 : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/AirMax1.png',
+  AirMax95 : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/AirMax95.png',
+  AirMax90 : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/AirMax90.png',
+  AirMax97 : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/AirMax97.png',
+  AirMax270 : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/AirMax270.png',
+  AirMax180 : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/AirMax180.png',
+  AirMaxVaporMax : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/AirMaxVaporMax.png',
+  TWFrank : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/TWFrank.png',
+  PrayingHands : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/PrayingHands.png',
+  CrossClubs : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/CrossClubs.png',
+  GolfFutura : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/GolfFutura.png',
+  NikeShoeBox : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/NikeShoeBox.png',
+  JustDoIt : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/JustDoIt.png',
+  NikeAir : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/NikeAir.png',
+  NOPATCH : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/NOPATCH.png'
+}
+
+function drawPatch() {
+  let patch = new Image();
+  patch.src = patches.AirMaxVaporMax;
+  patch.onload = function(){
+    ctxPatch.drawImage(this, 430, 500, 200, 200);
   };
 }
 
@@ -32,7 +52,7 @@ submitBtn.addEventListener('click', function(e){
   let backName = inputName.value;
   let backNumber = inputNumber.value;
   drawBack(backName, backNumber);
-  // drawLogo();
+  // drawPatch();
 })
 
 window.addEventListener('DOMContentLoaded', function(){
@@ -45,4 +65,5 @@ window.addEventListener('DOMContentLoaded', function(){
       jerseyView[i] === 'front' ? ctxFront.drawImage(this, 0, 0) : ctxBack.drawImage(this, 0, 0);
     }
   }
+  drawPatch();
 })
