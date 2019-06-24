@@ -1,57 +1,69 @@
-const canvas = document.getElementById('canvas');
-const canvasText = document.getElementById('canvasText');
-const ctx = canvas.getContext('2d');
-const ctxText = canvasText.getContext('2d');
+const canvasFront = document.getElementById('canvasFront');
+const canvasBack = document.getElementById('canvasBack');
+const canvasPatch = document.getElementById('canvasPatch');
+const ctxFront = canvasFront.getContext('2d');
+const ctxBack = canvasBack.getContext('2d');
+const ctxPatch = canvasPatch.getContext('2d');
 
 const inputName = document.getElementById('inputName');
 const inputNumber = document.getElementById('inputNumber');
+const displayName = document.getElementById('displayName');
+const displayNumber = document.getElementById('displayNumber');
 const submitBtn = document.getElementById('submit');
 
-function drawLogo() {
-  let image = new Image();
-  image.src = 'img/england-football-seeklogo.com.svg';
-  image.onload = function(){
-    ctxText.drawImage(this, 550, 500, 15, 25);
+const jerseys = {
+  front : 'img/front.png',
+  back : 'img/back.png'
+};
+
+const patches = {
+  AirMax1 : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/AirMax1.png',
+  AirMax95 : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/AirMax95.png',
+  AirMax90 : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/AirMax90.png',
+  AirMax97 : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/AirMax97.png',
+  AirMax270 : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/AirMax270.png',
+  AirMax180 : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/AirMax180.png',
+  AirMaxVaporMax : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/AirMaxVaporMax.png',
+  TWFrank : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/TWFrank.png',
+  PrayingHands : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/PrayingHands.png',
+  CrossClubs : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/CrossClubs.png',
+  GolfFutura : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/GolfFutura.png',
+  NikeShoeBox : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/NikeShoeBox.png',
+  JustDoIt : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/JustDoIt.png',
+  NikeAir : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/NikeAir.png',
+  NOPATCH : 'https://stg-cf-nike.brzc.kr/kr/ko_kr/cmsstatic/NOPATCH.png'
+}
+
+function drawPatch() {
+  let patch = new Image();
+  patch.src = patches.AirMaxVaporMax;
+  patch.onload = function(){
+    ctxPatch.drawImage(this, 430, 500, 200, 200);
   };
 }
 
-function drawTextName(value) {
-  ctxText.font = '80px englandRg';
-  ctxText.fillStyle = '#dcdada';
-  ctxText.strokeStyle = '#C0212A';
-  ctxText.lineWidth = 1;
-  ctxText.textAlign = 'center';
-  ctxText.fillText(value, 480, 250);
-  ctxText.strokeText(value, 480, 250);
-}
-
-function drawTextNumber(value){
-  ctxText.font = '280px englandRg';
-  ctxText.fillStyle = '#dcdada';
-  ctxText.strokeStyle = '#C0212A';
-  ctxText.lineWidth = 1;
-  ctxText.textAlign = 'center';
-  ctxText.fillText(value, 480, 490);
-  ctxText.strokeText(value, 480, 490);
+function drawBack(backName, backNumber) {
+  displayName.textContent = backName;
+  displayNumber.textContent = backNumber;
 }
 
 submitBtn.addEventListener('click', function(e){
   e.preventDefault();
-  let displayName = inputName.value;
-  let displayNumber = inputNumber.value;
-  canvasText.style.letterSpacing = '-5px';
-  ctxText.clearRect(0, 0, 1024, 1024);  
-  drawTextName(displayName);
-  drawTextNumber(displayNumber);
-  drawLogo();
+  let backName = inputName.value;
+  let backNumber = inputNumber.value;
+  drawBack(backName, backNumber);
+  // drawPatch();
 })
 
 window.addEventListener('DOMContentLoaded', function(){
-  let image = new Image();
-  image.src = 'img/back.png';
-  image.onload = function(){
-    canvas.width = this.naturalWidth;
-    canvas.height = this.naturalHeight;
-    ctx.drawImage(this, 0, 0);
-  };
+  let jerseyView = ['front', 'back'];
+
+  for (let i = 0; i < jerseyView.length; i++) {
+    let image = new Image();
+    image.src = jerseys[jerseyView[i]];
+    image.onload = function() {
+      jerseyView[i] === 'front' ? ctxFront.drawImage(this, 0, 0) : ctxBack.drawImage(this, 0, 0);
+    }
+  }
+  drawPatch();
 })

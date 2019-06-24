@@ -5,29 +5,81 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.x.x/css/swiper.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="wraper">
-    <canvas id="canvas" width="1024" height="1024"></canvas>
-    <canvas id="canvasText" width="1024" height="1024"></canvas>
-    <!-- <div class="svg">
-      <svg viewBox="0 0 500 500">
-        <path id="curve" d="M73.2,148.6c4-6.1,65.5-96.8,178.6-95.6c111.3,1.2,170.8,90.3,175.1,97" />
-        <text class="name" text-anchor="middle">
-          <textPath id="displayName" xlink:href="#curve" startOffset="50%">NEYMAR</textPath>
-        </text>
-        <text id="displayNumber" class="number" text-anchor="middle" x="230" y="250">76</text>
-      </svg>
-    </div> -->
+    <div class="front">
+      <canvas id="canvasFront" width="1024" height="1024"></canvas>
+      <canvas id="canvasPatch" width="1024" height="1024"></canvas>
+    </div>
+    <div class="back">
+      <canvas id="canvasBack" width="1024" height="1024"></canvas>
+      <div class="svg">
+        <svg width="1024" height="1024" viewbox="0 0 500 500">
+          <path id="curve" d="M73.2,148.6c4-6.1,65.5-96.8,178.6-95.6c111.3,1.2,170.8,90.3,175.1,97" />
+          <text class="name" text-anchor="middle">
+            <textPath id="displayName" xlink:href="#curve" startOffset="50%">NEYMAR</textPath>
+          </text>
+          <text id="displayNumber" class="number" text-anchor="middle" x="230" y="250">76</text>
+        </svg>
+      </div>
+    </div>
   </div>
 
+  <!-- Slider main container -->
+<div class="swiper-container">
+  <!-- Additional required wrapper -->
+  <div class="swiper-wrapper">
+      <!-- Slides -->
+      <div class="swiper-slide">Slide 1</div>
+      <div class="swiper-slide">Slide 2</div>
+      <div class="swiper-slide">Slide 3</div>
+      ...
+  </div>
+  <!-- If we need pagination -->
+  <div class="swiper-pagination"></div>
+
+  <!-- If we need navigation buttons -->
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+
+  <!-- If we need scrollbar -->
+  <div class="swiper-scrollbar"></div>
+</div>
+
   <form>
-    <input type="text" name="" id="inputName" placeholder="name" value="RASHFORD">
-    <input type="text" name="" id="inputNumber" placeholder="number" value="19">
+      <input type="text" name="" id="inputName" placeholder="Name">
+      <input type="text" name="" id="inputNumber" placeholder="Number">
     <button id="submit">submit</button>
   </form>
 
+  
   <script src="canvas.js"></script>
+  <script src="https://idangero.us/swiper/dist/js/swiper.min.js"></script>
+  <script>
+    var mySwiper = new Swiper ('.swiper-container', {
+      // Optional parameters
+      direction: 'vertical',
+      loop: true,
+      
+      // If we need pagination
+      pagination: {
+        el: '.swiper-pagination',
+      },
+      
+      // Navigation arrows
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      
+      // And if we need scrollbar
+      scrollbar: {
+        el: '.swiper-scrollbar',
+      },
+    })
+  </script>
 </body>
 </html>
