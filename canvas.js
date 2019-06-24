@@ -50,7 +50,7 @@ function drawBack(backName, backNumber) {
   displayNumber.textContent = backNumber;
 }
 
-submitBtn.addEventListener('click', function(e){
+submitBtn.addEventListener('click', (e) => {
   e.preventDefault();
   let backName = inputName.value;
   let backNumber = inputNumber.value;
@@ -58,12 +58,12 @@ submitBtn.addEventListener('click', function(e){
 })
 
 patchSelector.forEach(function(patch, index){
-  patch.addEventListener('click', function(e){
+  patch.addEventListener('click', () => {
     drawPatch(patches[index].url);
   })
 })
 
-window.addEventListener('DOMContentLoaded', function(){
+window.addEventListener('DOMContentLoaded', () => {
   let jerseyView = ['front', 'back'];
 
   for (let i = 0; i < jerseyView.length; i++) {
